@@ -1,214 +1,228 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="dep/normalize.css/normalize.css" />
-  <link rel="stylesheet" type="text/css" href="dep/Font-Awesome-master/web-fonts-with-css/css/fontawesome-all.min.css" />
-  <link rel="stylesheet" type="text/css" href="style.css" />
-  <script defer src="index.js"></script>
-  <title>Usmaan Bajwa | SRE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="description" content="Resume — Usmaan Bajwa, Site Reliability Engineer" />
+  <title>Usmaan Bajwa · SRE / DevOps</title>
+  <style>
+    /* ===== Design tokens ===== */
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a; /* slate-900 */
+      --muted: #475569; /* slate-600 */
+      --line: #e2e8f0;  /* slate-200 */
+      --accent: #0ea5a5; /* teal-500 */
+      --chip: #f1f5f9;  /* slate-100 */
+      --radius: 16px;
+      --shadow: 0 6px 24px rgba(2, 6, 23, 0.06);
+      --maxw: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root{
+        --bg: #0b1220; /* deep slate */
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --line: #1e293b;
+        --accent: #2dd4bf;
+        --chip: #0f172a;
+        --shadow: 0 10px 28px rgba(0,0,0,0.4);
+      }
+    }
+
+    /* ===== Base ===== */
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font: 400 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji","Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:var(--maxw); margin:auto; padding:24px;}
+
+    /* ===== Header / hero ===== */
+    header.hero{display:flex; align-items:center; justify-content:space-between; gap:24px; padding:24px; border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); background:linear-gradient(180deg, rgba(14,165,165,0.06), transparent 60%)}
+    .hero h1{margin:0; font-size:clamp(28px, 3.4vw, 40px); letter-spacing:-0.02em}
+    .hero .role{margin-top:4px; color:var(--muted); font-weight:500}
+    .actions{display:flex; flex-wrap:wrap; gap:10px}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:999px; border:1px solid var(--line); background:var(--bg); font-weight:600}
+    .btn.primary{background:var(--accent); color:#041316; border-color:transparent}
+    .btn:hover{transform:translateY(-1px)}
+
+    /* ===== Layout ===== */
+    .layout{display:grid; grid-template-columns:1fr; gap:24px; margin-top:28px}
+    @media (min-width: 980px){ .layout{grid-template-columns:320px 1fr} }
+
+    /* ===== Aside cards ===== */
+    .card{border:1px solid var(--line); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); background:var(--bg)}
+    .card h2{margin:0 0 12px; font-size:15px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted)}
+    .list{list-style:none; margin:0; padding:0}
+    .list li{padding:8px 0; border-top:1px solid var(--line)}
+    .list li:first-child{border-top:none}
+    .chips{display:flex; flex-wrap:wrap; gap:8px}
+    .chip{padding:6px 10px; border-radius:999px; background:var(--chip); border:1px solid var(--line); font-size:13px}
+
+    /* ===== Sections ===== */
+    section.block{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow)}
+    .block header{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px; background:linear-gradient(180deg, rgba(2,6,23,.02), rgba(2,6,23,.00)); border-bottom:1px solid var(--line)}
+    .block header h2{margin:0; font-size:15px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted)}
+    .block .content{padding:18px}
+
+    .item{display:grid; grid-template-columns:1fr; gap:6px; padding:16px 0; border-top:1px dashed var(--line)}
+    .item:first-child{border-top:none}
+    .item .top{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+    .item .title{font-weight:700}
+    .item .meta{color:var(--muted)}
+    .item ul{margin:6px 0 0 20px}
+    .item ul li{margin:6px 0}
+
+    /* ===== Footer / print ===== */
+    footer{margin:32px 0 8px; color:var(--muted); font-size:14px}
+    @media print{
+      .wrap{max-width:900px; padding:0}
+      header.hero, .card, section.block{box-shadow:none}
+      .actions{display:none}
+      a{text-decoration:none}
+      body{background:white; color:black}
+    }
+  </style>
 </head>
-<body lang="en">
-  <section id="main">
-    <header id="title">
-      <h1>Usmaan Bajwa</h1>
-      <span class="subtitle">Site Reliability Engineer</span>
+<body>
+  <div class="wrap">
+    <header class="hero" role="banner">
+      <div>
+        <h1>Usmaan Bajwa</h1>
+        <div class="role">Site Reliability Engineer</div>
+      </div>
+      <nav class="actions" aria-label="Primary actions">
+        <a class="btn primary" href="mailto:ukbajwa10@gmail.com">Email</a>
+        <a class="btn" href="https://linkedin.com/in/usmaan-bajwa" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="btn" href="https://github.com/ukbajwa10" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
     </header>
-    <section class="main-block">
-      <h2>
-        <i class="fa fa-suitcase"></i> Experiences
-      </h2>
-      <section class="blocks">
-        <div class="date">
-          <span>Present</span><span>2022</span>
+
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="card" aria-label="Summary & skills">
+        <h2>Summary</h2>
+        <p>SRE with a DevOps backbone: Azure, Databricks, Terraform, pipelines, and incident response. Fan of pragmatic automation and clean infra as code.</p>
+
+        <h2>Skills</h2>
+        <div class="chips" aria-label="Skills list">
+          <span class="chip">Azure</span>
+          <span class="chip">Terraform</span>
+          <span class="chip">Databricks</span>
+          <span class="chip">PowerShell</span>
+          <span class="chip">Go</span>
+          <span class="chip">Kubernetes</span>
+          <span class="chip">Monitoring</span>
+          <span class="chip">Incident Response</span>
         </div>
-        <div class="decorator">
-        </div>
-        <div class="details">
-          <header>
-            <h3>Site Reliability Engineer</h3>
-            <span class="place">Gimmal</span>
-            <span class="location">Houston, TX</span>
-          </header>
-          <div>
-            <ul>
-              <li>Developed a PowerShell tool to track SSL certificate expiry in a cloud tenant.</li>
-              <li>Created multi-factor authentication policies in Azure Active Directory to strengthen cloud tenant security while
-                minimizing client interference.</li>
-              <li>Developed a PowerShell script to swap a cloud storage key on client virtual machines.</li>
-            </ul>
+
+        <h2>Contact</h2>
+        <ul class="list">
+          <li><a href="mailto:ukbajwa10@gmail.com">ukbajwa10@gmail.com</a></li>
+          <li><a href="https://linkedin.com/in/usmaan-bajwa" target="_blank" rel="noreferrer">linkedin.com/in/usmaan-bajwa</a></li>
+          <li><a href="https://github.com/ukbajwa10" target="_blank" rel="noreferrer">github.com/ukbajwa10</a></li>
+          <!-- <li><a href="https://resume.usmaanbajwa.com" target="_blank" rel="noreferrer">resume.usmaanbajwa.com</a></li> -->
+        </ul>
+      </aside>
+
+      <!-- Main -->
+      <main>
+        <section class="block" aria-label="Experience">
+          <header><h2>Experience</h2></header>
+          <div class="content">
+            <article class="item">
+              <div class="top">
+                <div class="title">Site Reliability Engineer · Gimmal</div>
+                <div class="meta">Houston, TX · 2022 — Present</div>
+              </div>
+              <ul>
+                <li>Developed PowerShell tooling to track tenant SSL certificate expiry and alert on rotations.</li>
+                <li>Hardened identity by rolling out Azure AD MFA policies with minimal user friction.</li>
+                <li>Automated storage key swaps on client VMs to reduce manual escalations.</li>
+              </ul>
+            </article>
+
+            <article class="item">
+              <div class="top">
+                <div class="title">Technical Support Engineer · Gimmal</div>
+                <div class="meta">Houston, TX · 2021 — 2022</div>
+              </div>
+              <ul>
+                <li>Owned triage: routed and resolved ~40% of incoming tickets end‑to‑end.</li>
+                <li>Administered Salesforce users and customer access across internal systems.</li>
+                <li>Partnered with Dev, QA, and Success to accelerate fixes and close the loop with customers.</li>
+              </ul>
+            </article>
+
+            <article class="item">
+              <div class="top">
+                <div class="title">Technical Support Team Lead · MBS Secure</div>
+                <div class="meta">Houston, TX · 2020 — 2021</div>
+              </div>
+              <ul>
+                <li>Coordinated with DevOps on production incidents and platform changes.</li>
+                <li>Wrote and maintained knowledge base articles and incident documentation.</li>
+                <li>Provisioned VPN/RDP access and resolved cloud software issues.</li>
+              </ul>
+            </article>
           </div>
-        </div>
-      </section>
-      <section class="blocks">
-        <div class="date">
-          <span>2022</span><span>2021</span>
-        </div>
-        <div class="decorator">
-        </div>
-        <div class="details">
-          <header>
-            <h3>Technical Support Engineer</h3>
-            <span class="place">Gimmal</span>
-            <span class="location">Houston, TX</span>
-          </header>
-          <div>
-            <ul>
-              <li>Manage all incoming tickets, routing tickets to the correct parties as well as resolving 40% of all support tickets.</li>
-              <li>Administer new Salesforce users and grant customers access to various systems as needed.</li>
-              <li>Collaborate with multiple departments to ensure ticket resolution and client success.</li>
-            </ul>
+        </section>
+
+        <section class="block" aria-label="Projects">
+          <header><h2>Selected Projects</h2></header>
+          <div class="content">
+            <article class="item">
+              <div class="top">
+                <div class="title">Cloud Resume Challenge</div>
+                <div class="meta">2021 — 2020</div>
+              </div>
+              <ul>
+                <li>Static site w/ CI/CD to Azure Blob Static Website + Front Door; infra via Terraform.</li>
+                <li>Visitor API migrated off a fragile counter to serverless storage + cache (design placeholder — update with your final setup).</li>
+              </ul>
+            </article>
+            <article class="item">
+              <div class="top">
+                <div class="title">Linux Media Server / Homelab</div>
+                <div class="meta">2015 — 2014</div>
+              </div>
+              <ul>
+                <li>Self‑hosted services (arr‑stack, backups, monitoring); automated updates & alerts.</li>
+              </ul>
+            </article>
           </div>
-        </div>
-      </section>
-      <section class="blocks">
-        <div class="date">
-          <span>2021</span><span>2020</span>
-        </div>
-        <div class="decorator">
-        </div>
-        <div class="details">
-          <header>
-            <h3>Technical Support Team Lead</h3>
-            <span class="place">MBS Secure</span>
-            <span class="location">Houston, TX</span>
-          </header>
-          <div>
-            <ul>
-              <li>Collaborate with DevOps and other departments to ensure completion of projects and assist in Production issues.</li>
-              <li>Author knowledgebase articles on common issues and maintain knowledgebase versions and incident documentation.</li>
-              <li>Setup software, including creating VPN users, RDP sessions, and troubleshoot software issues with cloud services.</li>
-            </ul>
+        </section>
+
+        <section class="block" aria-label="Education">
+          <header><h2>Education</h2></header>
+          <div class="content">
+            <article class="item">
+              <div class="top">
+                <div class="title">B.S., Information Technology · Western Governors University</div>
+                <div class="meta">Remote · 2019 — 2021</div>
+              </div>
+            </article>
+            <article class="item">
+              <div class="top">
+                <div class="title">Backend, SQL & DevOps with Python · Nucamp</div>
+                <div class="meta">Remote · 2022</div>
+              </div>
+            </article>
           </div>
-        </div>
-      </section>
-    </section>
-    <section class="main-block">
-      <h2>
-        <i class="fa fa-folder-open"></i> Selected Projects
-      </h2>
-      <section class="blocks">
-        <div class="date">
-          <span>2021</span><span>2020</span>
-        </div>
-        <div class="decorator">
-        </div>
-        <div class="details">
-          <header>
-            <h3>Cloud Resume Challenge</h3>
-          </header>
-          <div>
-            <ul>
-              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
-              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec mi ante. Etiam odio eros, placerat eu metus id, gravida eleifend odio. Vestibulum dapibus pharetra odio, egestas ullamcorper ipsum congue ac</li>
-              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec mi ante. Etiam odio eros, placerat eu metus id, gravida eleifend odio</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-      <section class="blocks">
-        <div class="date">
-          <span>2014</span><span>2015</span>
-        </div>
-        <div class="decorator">
-        </div>
-        <div class="details">
-          <header>
-            <h3>Linux Media Server/Homelab</h3>
-          </header>
-          <div>
-            <ul>
-              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec mi ante. Etiam odio eros, placerat eu metus id, gravida eleifend odio. Vestibulum dapibus pharetra odio, egestas ullamcorper ipsum congue ac. Maecenas viverra tortor eget convallis vestibulum. Donec pulvinar venenatis est, non sollicitudin metus laoreet sed. Fusce tincidunt felis nec neque aliquet porttitor</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-      <section class="blocks">
-        <div class="date">
-          <span>2014</span>
-        </div>
-        <div class="decorator">
-        </div>
-        <div class="details">
-          <header>
-            <h3>Linux From Scratch</h3>
-          </header>
-          <div>
-            <ul>
-              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec mi ante. Etiam odio eros, placerat eu metus id, gravida eleifend odio</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </section>
-    <section class="main-block concise">
-      <h2>
-        <i class="fa fa-graduation-cap"></i> Education
-      </h2>
-      <section class="blocks">
-        <div class="date">
-          <span>2022</span><span>2022</span>
-        </div>
-        <div class="decorator">
-        </div>
-        <div class="details">
-          <header>
-            <h3>Backend, SQL, and DevOps with Python Bootcamp</h3>
-            <span class="place">Nucamp Coding Bootcamp</span>
-            <span class="location">Remote</span>
-          </header>
-        </div>
-      </section>
-      <section class="blocks">
-        <div class="date">
-          <span>2021</span><span>2019</span>
-        </div>
-        <div class="decorator">
-        </div>
-        <div class="details">
-          <header>
-            <h3>Bachelor of Science - Information Technology</h3>
-            <span class="place">Western Governors University</span>
-            <span class="location">Remote</span>
-          </header>
-        </div>
-      </section>
-    </section>
-  </section>
-  <aside id="sidebar">
-    <div class="side-block" id="contact">
-      <h1>
-        Contact Info
-      </h1>
-      <ul>
-        <li><i class="fa fa-globe"></i> <a href="https://resume.usmaanbajwa.com" target="_blank">resume.usmaanbajwa.com</a></li>
-        <li><i class="fab fa-linkedin"></i></i> <a href="https://linkedin.com/in/usmaan-bajwa">linkedin.com/in/usmaan-bajwa</a></li>
-        <li><i class="fa fa-envelope"></i> <a href="mailto:ukbajwa10@gmail.com">ukbajwa10@gmail.com</a></li>
-        <li><i class="fab fa-github" title="GitHub"></i> <a href="https://github.com/ukbajwa10">github.com/ukbajwa10</a></li>
-      </ul>
+        </section>
+      </main>
     </div>
-    <div class="side-block" id="skills">
-      <h1>
-        Skills
-      </h1>
-      <ul>
-        <li>Automation</li>
-        <hr>
-        <li>Incident Response</li>
-        <hr>
-        <li>Monitoring</li>
-        <hr>
-        <li>Cloud Engineering</li>
-        <hr>
-        <li>DevOps</li>
-      </ul>
-    </div>
-    <div>
-      <h1>Visitor Counter</h1>
-      <hr>
-      <div class="website-counter"></div>
-    </div>
-  </aside>
+
+    <footer>
+      <span>© <script>document.write(new Date().getFullYear())</script> Usmaan Bajwa</span>
+    </footer>
+  </div>
 </body>
 </html>

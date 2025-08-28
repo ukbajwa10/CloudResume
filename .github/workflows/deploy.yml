@@ -1,0 +1,65 @@
+name: Deploy static site to Azure Blob
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write # required for OIDC
+  contents: read
+
+env:
+  STORAGE_ACCOUNT: resumesiteukb
+  RESOURCE_GROUP: cloudResumeChallenge # only needed if you purge Front Door
+  FD_PROFILE: ukb-resume # optional
+  FD_ENDPOINT: ukb-resume # optional
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      # Idempotent: ensures Static Website is on ($web container exists)
+      - name: Ensure static website is enabled
+        run: |
+          az storage blob service-properties update \
+            --account-name "$STORAGE_ACCOUNT" \
+            --static-website \
+            --index-document index.html \
+            --404-document 404.html \
+            --auth-mode login || true
+
+      # Mirror repo -> $web (deletes remote files that aren't in your repo)
+      - name: Sync to $web
+        run: |
+          az storage blob sync \
+            --account-name "$STORAGE_ACCOUNT" \
+            --container '$web' \
+            --source . \
+            --auth-mode login \
+            --exclude-path '.git;.github' \
+            --delete-destination true
+
+      # Optional: purge Azure Front Door cache so changes show immediately
+      - name: Purge Front Door (optional)
+        if: env.FD_PROFILE != '' && env.FD_ENDPOINT != ''
+        run: |
+          az afd endpoint purge \
+            --resource-group "$RESOURCE_GROUP" \
+            --profile-name "$FD_PROFILE" \
+            --endpoint-name "$FD_ENDPOINT" \
+            --content-paths '/*'
+
+      - name: Logout
+        if: always()
+        run: az logout

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>404 — Page Not Found</title>
+  <style>
+    /* ===== Design tokens (match index.html) ===== */
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a;   /* slate-900 */
+      --muted: #475569;  /* slate-600 */
+      --line: #e2e8f0;   /* slate-200 */
+      --accent: #0ea5a5; /* teal-500 */
+      --radius: 16px;
+      --shadow: 0 6px 24px rgba(2, 6, 23, 0.06);
+      --maxw: 1120px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1220;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --line: #1e293b;
+        --accent: #2dd4bf;
+        --shadow: 0 10px 28px rgba(0,0,0,0.4);
+      }
+    }
+
+    /* ===== Base ===== */
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: radial-gradient(1200px 600px at 50% -10%, rgba(14,165,165,0.08), transparent 60%), var(--bg);
+      color: var(--text);
+      font: 400 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji","Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===== Card ===== */
+    .wrap { width: min(720px, 100%); }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+    .eyebrow {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 14px;
+      margin: 0 0 8px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 5vw, 40px);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    p { margin: 0 0 18px; color: var(--muted); }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      font-weight: 600;
+    }
+    .btn.primary {
+      background: var(--accent);
+      color: #041316;
+      border-color: transparent;
+      text-decoration: none;
+    }
+    .btn:hover { transform: translateY(-1px); }
+
+    footer {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap" role="main">
+    <section class="card" aria-labelledby="not-found-title">
+      <p class="eyebrow">Error 404</p>
+      <h1 id="not-found-title">Page not found</h1>
+      <p>The page you’re looking for doesn’t exist or may have moved.</p>
+      <div class="actions">
+        <a class="btn primary" href="/">Back to home</a>
+        <a class="btn" href="mailto:ukbajwa10@gmail.com">Contact</a>
+        <a class="btn" href="https://github.com/ukbajwa10" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+      <footer>© <script>document.write(new Date().getFullYear())</script> Usmaan Bajwa</footer>
+    </section>
+  </main>
+</body>
+</html>

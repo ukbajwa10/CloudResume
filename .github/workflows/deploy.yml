@@ -51,12 +51,12 @@ jobs:
             --delete-destination true
 
       # purge Azure Front Door cache so changes show immediately
-      - name: Purge Front Door
+      - name: Purge CDN endpoint cache
         run: |
-          az afd endpoint purge \
+          az cdn endpoint purge \
             --resource-group "$RESOURCE_GROUP" \
             --profile-name "$FD_PROFILE" \
-            --endpoint-name "$FD_ENDPOINT" \
+            --name "$FD_ENDPOINT" \
             --content-paths '/*'
 
       - name: Logout

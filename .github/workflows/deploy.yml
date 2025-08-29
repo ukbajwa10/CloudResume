@@ -50,9 +50,8 @@ jobs:
             --exclude-path '.git;.github' \
             --delete-destination true
 
-      # Optional: purge Azure Front Door cache so changes show immediately
-      - name: Purge Front Door (optional)
-        if: env.FD_PROFILE != '' && env.FD_ENDPOINT != ''
+      # purge Azure Front Door cache so changes show immediately
+      - name: Purge Front Door
         run: |
           az afd endpoint purge \
             --resource-group "$RESOURCE_GROUP" \

@@ -11,9 +11,6 @@ permissions:
 
 env:
   STORAGE_ACCOUNT: resumesiteukb
-  RESOURCE_GROUP: cloudResumeChallenge # only needed if you purge Front Door
-  FD_PROFILE: ukb-resume # optional
-  FD_ENDPOINT: ukb-resume # optional
 
 jobs:
   deploy:
@@ -49,15 +46,6 @@ jobs:
             --auth-mode login \
             --exclude-path '.git;.github' \
             --delete-destination true
-
-      # purge Azure Front Door cache so changes show immediately
-      - name: Purge CDN endpoint cache
-        run: |
-          az cdn endpoint purge \
-            --resource-group "$RESOURCE_GROUP" \
-            --profile-name "$FD_PROFILE" \
-            --name "$FD_ENDPOINT" \
-            --content-paths '/*'
 
       - name: Logout
         if: always()

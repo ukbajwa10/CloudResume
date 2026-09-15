@@ -5,8 +5,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
-  <meta name="description" content="Resume — Usmaan Bajwa, Site Reliability Engineer" />
-  <title>Usmaan Bajwa · SRE / DevOps</title>
+  <meta name="description" content="Resume — Usmaan Bajwa, Platform / DevOps Engineer" />
+  <title>Usmaan Bajwa · Platform / DevOps</title>
   <style>
     /* ===== Design tokens ===== */
     :root {
@@ -240,6 +240,12 @@
       font-weight: 700
     }
 
+    .item .title .sub {
+      font-weight: 500;
+      color: var(--muted);
+      font-size: 14px
+    }
+
     .item .meta {
       color: var(--muted)
     }
@@ -292,7 +298,7 @@
     <header class="hero" role="banner">
       <div>
         <h1>Usmaan Bajwa</h1>
-        <div class="role">Site Reliability Engineer</div>
+        <div class="role">Platform / DevOps Engineer</div>
       </div>
       <nav class="actions" aria-label="Primary actions">
         <a class="btn primary" href="mailto:ukbajwa10@gmail.com">Email</a>
@@ -305,16 +311,18 @@
       <!-- Sidebar -->
       <aside class="card" aria-label="Summary & skills">
         <h2>Summary</h2>
-        <p>Site Reliability Engineer specializing in cloud infrastructure with expertise in infrastructure-as-code, automation, and tooling. Strong background in incident response, process improvement, and reducing operational toil.</p>
+        <p>Platform and DevOps engineer focused on Azure infrastructure-as-code, build platforms, and internal tooling — the Terraform modules, golden images, and CI/CD pipelines other engineers ship on, plus the Go and PowerShell tooling that removes the toil in between.</p>
 
         <h2>Skills</h2>
         <div class="chips" aria-label="Skills list">
           <span class="chip">Azure</span>
           <span class="chip">Terraform</span>
-          <span class="chip">Databricks</span>
-          <span class="chip">PowerShell</span>
-          <span class="chip">Go</span>
           <span class="chip">Bicep</span>
+          <span class="chip">Packer</span>
+          <span class="chip">Azure DevOps</span>
+          <span class="chip">Databricks</span>
+          <span class="chip">Go</span>
+          <span class="chip">PowerShell</span>
           <span class="chip">Monitoring</span>
           <span class="chip">Incident Response</span>
         </div>
@@ -340,63 +348,53 @@
             <article class="item">
               <div class="top">
                 <div class="title">DevOps Engineer · Ascot Group</div>
-                <div class="meta">Houston, TX · 2025 — Present</div>
+                <div class="meta">Houston, TX · Apr 2025 — Present</div>
               </div>
               <ul>
-                <li>Led adoption of Terraform as the primary IaC tool, authoring reusable modules and standardizing deployment patterns across Azure infrastructure projects.</li>
-                <li>Designed and deployed a self-hosted Azure DevOps build agent pool using VMSS scale sets, enabling elastic, cost-efficient CI/CD capacity in an air-gapped environment.</li>
-                <li>Built and maintained a hardened golden VM image via Azure Compute Gallery, used as the base image for VMSS agent pools and standard Terraform VM deployments.</li>
-                <li>Provisioned Azure Databricks infrastructure via Terraform to support data engineering workloads.</li>
-                <li>Authored Bicep and Terraform templates for Azure networking, IAM, and App Service infrastructure, reducing manual provisioning across engineering teams.</li>
-                <li>Created an Azure Automation Runbook (PowerShell) to automate monthly App Registration reporting for the Cybersecurity team.</li>
-                <li>Developed a Go CLI tool to query Azure VNets, detect CIDR overlaps, and generate collision-free address spaces for new network deployments.</li>
+                <li>Led adoption of Terraform as the primary IaC tool, authoring a versioned, documented module library (VNet with hub peering and firewall route tables, Key Vault, Azure SQL, App Service, and more) consumed across teams via Git source references.</li>
+                <li>Designed and deployed a self-hosted Azure DevOps build agent pool using VMSS scale sets on CIS-hardened Ubuntu 24.04 and Windows Server 2022 golden images built with Packer, published through Azure Compute Gallery and migrated to a consolidated global gallery — elastic, cost-efficient CI/CD capacity in an air-gapped environment.</li>
+                <li>Built the Terraform codebase for a client-facing Azure/Databricks data platform — Unity Catalog, multi-storage-account layout, and hub-and-spoke networking behind Palo Alto firewalls.</li>
+                <li>Stand up POCs and full environments for application teams — Azure services and Databricks environments in spoke VNets behind private endpoints and private DNS, with managed identities and scoped Entra app roles replacing shared secrets.</li>
+                <li>Authored a shared, parameterized Azure DevOps pipeline for Terraform plan/apply consumed by module and deployment name, replacing per-project pipeline copies; OIDC-authenticated with no standing credentials.</li>
+                <li>Driving the organization's Azure DevOps to GitHub Enterprise migration — built a CSV-driven, runtime-matrix pipeline (plan, migrate, record, reconcile) on the <code>ado2gh</code> CLI extension with automated reconciliation of migration state.</li>
+                <li>Authored Bicep templates for networking, IAM, and App Service, and an Azure Automation Runbook (PowerShell) reporting App Registration secret and certificate expiry to prevent silent auth outages.</li>
+                <li>Developed <strong>aznet</strong>, a Go CLI tool to query Azure VNets, detect CIDR overlaps, and generate collision-free address spaces for new network deployments.</li>
+                <li>Primary US point of contact on the platform team for developer infrastructure and DevOps support — pipeline and build agent failures, Azure access and networking, and IaC guidance for application teams.</li>
+                <li>Own internal technical training and documentation for the infrastructure team — module READMEs, pipeline runbooks, and onboarding material.</li>
               </ul>
             </article>
 
             <article class="item">
               <div class="top">
-                <div class="title">Site Reliability Engineer · Gimmal</div>
-                <div class="meta">Houston, TX · 2022 — 2025</div>
+                <div class="title">Site Reliability Engineer · Gimmal <span class="sub">(Assoc. SRE, Mar 2022 – Apr 2023 → SRE, Apr 2023 – Apr 2025)</span></div>
+                <div class="meta">Houston, TX · Mar 2022 — Apr 2025</div>
               </div>
               <ul>
-                <li>Built out monitoring and logging across 3 SaaS products using Sumo Logic, Azure Application
-                  Insights, and PRTG, improving visibility and uptime.</li>
-                <li>Created Go CLI tooling to troubleshoot SaaS issues, speed up data retrieval, and eliminate
-                  click-heavy operations.</li>
-                <li>Automated deployments of 300+ servers with Azure DevOps and TeamCity pipelines, reducing manual toil
-                  and deployment time.</li>
-                <li>Wrote PowerShell scripts to streamline deployments and updates, saving hours per release and cutting
-                  update time by 60+ minutes.</li>
-                <li>Developed PowerShell tool to generate monthly SSL certificate reports, reducing SSL-related outages
-                  by 90%.</li>
-                <li>Rolled out Azure AD MFA policies and automated storage key swaps to strengthen security and reduce
-                  escalations with minimal client friction.</li>
-                <li>Provided 24/7 production support, incident response, and debugging to uphold SLO commitments.</li>
+                <li>Built the monitoring and logging stack across three SaaS products using Sumo Logic, Azure Application Insights, and PRTG — alerting, dashboards, and auto-scaling policies that surfaced capacity problems before customers reported them.</li>
+                <li>Automated deployment of 300+ servers with Azure DevOps and TeamCity pipelines driven by maintained YAML configuration.</li>
+                <li>Replaced the manual SaaS update process with PowerShell automation, turning a multi-hour release into a pipeline run.</li>
+                <li>Built Go CLI tooling used across the team that replaced manual click-through work for common SaaS troubleshooting and data retrieval.</li>
+                <li>Implemented Azure AD MFA policies and automated key rotation; carried 24/7 on-call for incident response and remediation.</li>
               </ul>
-
             </article>
 
             <article class="item">
               <div class="top">
                 <div class="title">Technical Support Engineer · Gimmal</div>
-                <div class="meta">Houston, TX · 2021 — 2022</div>
+                <div class="meta">Houston, TX · Oct 2021 — Mar 2022</div>
               </div>
               <ul>
-                <li>Owned triage: routed and resolved ~40% of incoming tickets end‑to‑end.</li>
-                <li>Administered Salesforce users and customer access across internal systems.</li>
-                <li>Partnered with Dev, QA, and Success to accelerate fixes and close the loop with customers.</li>
+                <li>Owned frontline resolution for proprietary records-management software, administered Salesforce users and customer access, and authored the knowledge base articles the team still routes to.</li>
               </ul>
             </article>
 
             <article class="item">
               <div class="top">
-                <div class="title">Technical Support Team Lead · MBS Secure</div>
-                <div class="meta">Pearland, TX · 2020 — 2021</div>
+                <div class="title">Technical Support Team Lead · MBS Secure <span class="sub">(Technical Support Engineer, Nov 2020 – May 2021 → Team Lead, May 2021 – Oct 2021)</span></div>
+                <div class="meta">Pearland, TX · Nov 2020 — Oct 2021</div>
               </div>
               <ul>
-                <li>Coordinated with DevOps team on production incidents and platform changes.</li>
-                <li>Wrote and maintained knowledge base articles and incident documentation.</li>
-                <li>Provisioned VPN/RDP access and resolved cloud software issues.</li>
+                <li>Led Tier 1/2 support for 25–30 customers weekly; provisioned VPN/RDP access, administered Active Directory and Office 365, and partnered with DevOps on incidents and platform changes.</li>
               </ul>
             </article>
           </div>
@@ -407,6 +405,22 @@
             <h2>Selected Projects</h2>
           </header>
           <div class="content">
+            <article class="item">
+              <div class="top">
+                <div class="title">aznet</div>
+              </div>
+              <ul>
+                <li>Go CLI for Azure VNet troubleshooting: subnet and address-space querying with CIDR overlap detection across subscriptions.</li>
+              </ul>
+            </article>
+            <article class="item">
+              <div class="top">
+                <div class="title">azrbac</div>
+              </div>
+              <ul>
+                <li>Go TUI for bulk Azure RBAC assignments, collapsing repetitive portal work into a single reviewable operation.</li>
+              </ul>
+            </article>
             <article class="item">
               <div class="top">
                 <div class="title">Cloud Resume Challenge</div>
@@ -443,6 +457,30 @@
               <div class="top">
                 <div class="title">Backend, SQL & DevOps with Python · Nucamp</div>
                 <div class="meta">Remote · 2022</div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="block" aria-label="Certifications">
+          <header>
+            <h2>Certifications</h2>
+          </header>
+          <div class="content">
+            <article class="item">
+              <div class="top">
+                <div class="title">HashiCorp Terraform Associate (004)</div>
+                <div class="meta">2026</div>
+              </div>
+            </article>
+            <article class="item">
+              <div class="top">
+                <div class="title">Microsoft Certified: Azure Administrator (AZ‑104) · Azure Fundamentals (AZ‑900)</div>
+              </div>
+            </article>
+            <article class="item">
+              <div class="top">
+                <div class="title">CompTIA A+, Network+, Security+ · ITIL v4 · LPI Linux Essentials</div>
               </div>
             </article>
           </div>
